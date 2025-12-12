@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rafael_Moreno_Ejercicio_7</title>
+    <style>
+        body
+        {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .post 
+        {
+            border: solid rgba(0, 0, 0, 0.17) 2px;
+            border-radius: 10px;
+            padding: 1em;
+            margin: 1em 0;
+        }
+
+        .user
+        {
+            margin: 0;
+            padding-bottom: 1em;
+            font-weight: 500;
+            border-bottom: solid 1px rgb(157, 157, 157);
+        }
+    </style>
+</head>
+
+<body>
+    <br>
+    <input type="text" name="user" id="user" placeholder="Nombre de usuario" value="">
+    <br>
+    <br>
+    <textarea name="opinion" id="opinion" placeholder="Opionion.."></textarea>
+    <br>
+    <button>Publicar</button>
+    <div id="error"></div>
+    <hr>
+    <h2>Publicaciones</h2>
+    <div id="posts"></div>
+    <script type="text/javascript">
+
+        let error = document.getElementById("error")
+
+        document.querySelector("button").addEventListener("click", () => {
+
+            let user = document.getElementById("user").value
+            let texto = document.getElementById("opinion").value
+
+            error.innerHTML = "";
+
+            if(user=="" || texto == "") {
+
+               let errorNode = document.createElement("p")
+               errorNode.classList.add("errorNode")
+               errorNode.innerHTML = "[ERROR] - No hay contenido"
+               error.appendChild(errorNode)
+               return
+            }
+
+            let divNode=document.createElement("div")
+            divNode.classList.add("post")
+
+            let userPost= document.createElement("p")
+            userPost.classList.add("user")
+            userPost.innerHTML = user + " • " + new Date().toLocaleString();
+            console.log(userPost);
+
+            let textoPost = document.createElement("p")
+            textoPost.classList.add("texto")
+            textoPost.innerHTML = texto;
+            
+            divNode.appendChild(userPost)
+            divNode.appendChild(textoPost)
+
+            let div=document.getElementById("posts");
+
+            div.insertBefore(divNode, div.children[0])
+        })
+    </script>
+</body>
+
+</html>
